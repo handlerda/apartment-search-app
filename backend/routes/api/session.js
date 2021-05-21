@@ -8,9 +8,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
 // Log in a user with username and password
-
 // Express validator
-
 const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
