@@ -48,12 +48,10 @@ router.post(
 // DOES NOT WORK
 router.delete("/", (_req, res) => {
   res.clearCookie("token");
-  console.log(res);
   return res.json({ message: "success" });
 });
 
 router.get("/", restoreUser, (req, res) => {
-  console.log(req);
   const { user } = req;
   if (user) {
     return res.json({
