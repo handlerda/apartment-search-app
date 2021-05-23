@@ -65,6 +65,8 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "apartmentId",
       foreignKey: "userId",
     });
+    User.hasMany(models.Reviews, { foreignKey: "authorId" });
+    User.hasMany(models.Comments, { foreignKey: "authorId" });
   };
 
   // USER PROTOTYPE FUNCTIONS
