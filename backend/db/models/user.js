@@ -32,10 +32,10 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
-      currentAddress: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
+      // currentApartmentId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: true,
+      // },
       anonymous: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -57,8 +57,14 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   );
+
   User.associate = function (models) {
     // associations can be defined here
+    User.belongsToMany(models.Apartment, {
+      through: "interestedApartments",
+      otherKey: "apartmentId",
+      foreignKey: "userId",
+    });
   };
 
   // USER PROTOTYPE FUNCTIONS
