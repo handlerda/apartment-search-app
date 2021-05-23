@@ -32,6 +32,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
+      currentAddress: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      anonymous: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
     },
     {
       defaultScope: {
@@ -53,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
 
+  // USER PROTOTYPE FUNCTIONS
   User.prototype.toSafeObject = function () {
-    // remember, this cannot be an arrow function
     const { id, username, email } = this; // context will be the User instance
     return { id, username, email };
   };
