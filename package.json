@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/handlerda/apartment-search-app/issues"
   },
-  "homepage": "https://github.com/handlerda/apartment-search-app#readme"
+  "homepage": "https://github.com/handlerda/apartment-search-app#readme",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.16",
+    "axios": "^0.21.1"
+  }
 }
