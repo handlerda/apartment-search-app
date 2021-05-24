@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "userId",
       foreignKey: "apartmentId",
     });
-    Address.hasMany(models.Review, { foreignKey: "apartmentId" });
+    Apartment.hasMany(models.Review, { foreignKey: "apartmentId" });
   };
   return Apartment;
 };

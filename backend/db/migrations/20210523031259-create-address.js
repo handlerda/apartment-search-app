@@ -24,11 +24,6 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      // apartmentId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      //   references: { model: "Apartments" },
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

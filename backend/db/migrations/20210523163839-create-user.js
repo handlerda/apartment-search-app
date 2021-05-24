@@ -22,11 +22,11 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false,
       },
-      // currentApartmentId: {
-      //   allowNull: true,
-      //   type: Sequelize.INTEGER,
-      //   references: { model: "apartment" },
-      // },
+      currentApartmentId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: { model: "Apartments" },
+      },
       anonymous: {
         allowNull: false,
         type: Sequelize.BOOLEAN,

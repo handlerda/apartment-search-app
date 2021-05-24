@@ -3,9 +3,11 @@
 const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
+const apartmentsRouter = require("./apartments");
 
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
+router.use("/apartments", apartmentsRouter);
 
 // testing api routes
 

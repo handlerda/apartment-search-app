@@ -32,10 +32,10 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
-      // currentApartmentId: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: true,
-      // },
+      currentApartmentId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       anonymous: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -65,8 +65,8 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "apartmentId",
       foreignKey: "userId",
     });
-    User.hasMany(models.Reviews, { foreignKey: "authorId" });
-    User.hasMany(models.Comments, { foreignKey: "authorId" });
+    User.hasMany(models.Review, { foreignKey: "authorId" });
+    User.hasMany(models.Comment, { foreignKey: "authorId" });
   };
 
   // USER PROTOTYPE FUNCTIONS

@@ -1,0 +1,22 @@
+nav {
+  background-color: rgb(232, 164, 61);
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.session-links {
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.session-links a {
+  margin: 1rem;
+}
+
+.container > li {
+  flex: 1;
+}
