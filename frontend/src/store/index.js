@@ -1,11 +1,13 @@
 // frontend/src/store/index.js
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import apartmentReducer from "./apartment";
 import sessionReducer from "./session";
 
 // root reducer
 const rootReducer = combineReducers({
   session: sessionReducer,
+  apartments: apartmentReducer,
 });
 
 // add enhancer for prod / dev
