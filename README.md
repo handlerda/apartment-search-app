@@ -6,7 +6,32 @@ Searching for a new aparment is the worst. It's hard to find if an apartment bui
 
 ### V1 DB Schema:
 
-
 [DB Schema ](https://dbdiagram.io/d/60a82d3fb29a09603d16003e) : dbdiagram.io 
 
-![Apartment App](https://user-images.githubusercontent.com/48835180/119243854-d7964400-bb27-11eb-9aa2-0083d14af583.png)
+![Apartment App]![image](https://user-images.githubusercontent.com/48835180/119288932-d7b94100-bc06-11eb-8918-b858f29aeeac.png)
+
+### V1 Feature List
+
+* Users
+    * Create a new user.
+    * Login as a existing user.
+    * Explore the site via a demo user.
+* Apartments 
+    * View apartment address and existing reviews.
+    * Allow a user to mark the apartment as intrested.
+    * Allow the user to reach out to other users who currently live at the apartment.
+* Reviews
+    * Allow users to add an apartment review.
+    * Allow users to edit / delete their reviews.
+* Comments 
+    * Allow users to comment on apartment reviews.
+    * Allow users to edit / delete their comments.
+* Intrested Apartments  
+    * Allow logged in users to follow spacific apartments. 
+    * Render intrested apartments on the users home page. 
+ 
+* Bonus 
+    * Allow users to msg other users in app. 
+    * Allow users to cordinate meetups via an in app calander.
+    * Render each apartment on map (mapbox or google maps).  
+    * Allow apartment's to advertise in the app via google adsense or another method.  
