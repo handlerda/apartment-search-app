@@ -81,3 +81,11 @@ h5 {
 .card-body {
   padding: 1.2em;
 }
+
+#ratings {
+  color: black;
+}
+
+#address {
+  color: black;
+}

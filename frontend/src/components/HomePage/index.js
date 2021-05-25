@@ -29,14 +29,19 @@ function HomePage() {
     apartments && (
       <div className="card-board">
         {apartments.results.map((apt) => {
+          console.log(apt);
+
           return (
-            <Card
-              key={apt.place_id}
-              title={apt.name}
-              address={apt.formatted_address}
-              ratings={apt.rating}
-              location={apt.geometry.location}
-            />
+            apt.photos && (
+              <Card
+                key={apt.place_id}
+                title={apt.name}
+                address={apt.formatted_address}
+                ratings={apt.rating}
+                location={apt.geometry.location}
+                photoId={apt.photos || null}
+              />
+            )
           );
         })}
       </div>

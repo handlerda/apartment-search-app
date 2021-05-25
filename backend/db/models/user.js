@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       anonymous: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

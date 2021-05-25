@@ -28,7 +28,7 @@ module.exports = {
         references: { model: "Apartments" },
       },
       anonymous: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
