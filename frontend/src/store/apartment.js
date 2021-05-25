@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_LOCAL_APTS = "apartment/getLocal";
 const GET_APT_DETAIL = "apartment/getDetail";
+const ADD_INTERESTED_APT = "apartment/addInterested";
 
 // helper
 const getLocal = (payload) => {
@@ -14,6 +15,13 @@ const getLocal = (payload) => {
 const getDetail = (payload) => {
   return {
     type: GET_APT_DETAIL,
+    payload,
+  };
+};
+
+const addIntrested = (payload) => {
+  return {
+    type: ADD_INTERESTED_APT,
     payload,
   };
 };
@@ -34,6 +42,19 @@ export const getApartmentDetails = (id) => async (dispatch) => {
   return data;
 };
 
+export const addInterestedApartment = (aptId, userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/apartments/${aptId}/interested`, {
+    method: "POST",
+    body: JSON.stringify({
+      userId,
+      aptId,
+    }),
+  });
+  const data = await response.json();
+  dispatch(addIntrested(data));
+  return data;
+};
+
 // apartment reducer
 const initialState = { apartments: null };
 const apartmentReducer = (state = initialState, action) => {
@@ -46,6 +67,10 @@ const apartmentReducer = (state = initialState, action) => {
     case GET_APT_DETAIL:
       newState = Object.assign({}, state);
       newState.apartmentDetail = action.payload;
+      return newState;
+    case ADD_INTERESTED_APT:
+      newState = Object.assign({}, state);
+      newState.interestedApt = action.payload;
       return newState;
     default:
       return state;

@@ -3,27 +3,18 @@ module.exports = (sequelize, DataTypes) => {
   const Address = sequelize.define(
     "Address",
     {
-      street: {
+      formattedAddress: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      zipCode: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      state: {
+      latitude: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      country: {
+      longitude: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      // apartmentId: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   unique: true,
-      // },
     },
     {}
   );
