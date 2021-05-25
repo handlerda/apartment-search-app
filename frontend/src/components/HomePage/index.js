@@ -34,6 +34,7 @@ function HomePage() {
           return (
             apt.photos && (
               <Card
+                id={apt.place_id}
                 key={apt.place_id}
                 title={apt.name}
                 address={apt.formatted_address}

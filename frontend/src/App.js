@@ -9,6 +9,11 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import "./index.css";
 
+console.log(process.env);
+const { REACT_APP_NOT_SECRET_CODE } = process.env;
+
+console.log(REACT_APP_NOT_SECRET_CODE);
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,6 +37,9 @@ function App() {
             <div className="content-container">
               <SignupFormPage />
             </div>
+          </Route>
+          <Route path={`/apartment/:id`}>
+            <h1>Hello world</h1>
           </Route>
         </Switch>
       )}
