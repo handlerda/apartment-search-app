@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import apartmentReducer, {
   addInterestedApartment,
+  deleteInterestedApartment,
   getApartmentDetails,
 } from "../../store/apartment";
 import Header from "../Controls/Header";
@@ -12,27 +13,28 @@ import Map from "../Card/Map";
 
 function Apartment() {
   const { id } = useParams();
-  const [interested, setInterested] = useState(null);
 
   console.log(id);
   const dispatch = useDispatch();
   // get apt details from redux
   const apartments = useSelector((state) => state.apartments.apartmentDetail);
-  const interestedApartments = useSelector((state) => state.apartments);
+  //const interestedApartments = useSelector((state) => state.apartments.apartmentDetail.isInterestedApartment);
   const sessionUser = useSelector((state) => state.session.user);
+  const [interested, setInterested] = useState(null);
 
-  console.log(interestedApartments);
+  //console.log(interestedApartments);
   console.log(sessionUser);
   // get location details from redux store
 
   useEffect(() => {
-    const aptDetails = dispatch(getApartmentDetails(id));
-    if (aptDetails.isInterestedApartment) {
-      setInterested(true);
-    } else {
-      setInterested(false);
-    }
-  }, []);
+    const getAptDetails = async () => {
+      const aptDetails = await dispatch(getApartmentDetails(id));
+      aptDetails.isInterestedApartment
+        ? setInterested(true)
+        : setInterested(false);
+    };
+    getAptDetails();
+  }, [dispatch]);
   console.log(id);
   console.log(apartments);
   if (!apartments) {
@@ -40,12 +42,21 @@ function Apartment() {
   }
 
   async function handleSave(e) {
-    const data = await dispatch(addInterestedApartment(id, sessionUser.id));
-    console.log(data);
-    setInterested(!interested);
-    return data;
+    if (!interested) {
+      const data = await dispatch(addInterestedApartment(id, sessionUser.id));
+      setInterested(!interested);
+      console.log(data);
+      return data;
+    } else {
+      const data = await dispatch(
+        deleteInterestedApartment(id, sessionUser.id)
+      );
+      setInterested(!interested);
+      console.log(data);
+      return data;
+    }
   }
-  console.log(`here is interested`, interested);
+
   return (
     apartments &&
     interested !== null && (
@@ -75,8 +86,11 @@ function Apartment() {
           </div>
         </div>
         <div className="apartment-right-container">
-          {interested && <button onClick={handleSave}>Not Interested</button>}
-          {!interested && <button onClick={handleSave}> Interested</button>}
+          {interested === true ? (
+            <button onClick={handleSave}>Not Interested</button>
+          ) : (
+            <button onClick={handleSave}> Interested</button>
+          )}
         </div>
       </div>
     )

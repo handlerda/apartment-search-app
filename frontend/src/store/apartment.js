@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_LOCAL_APTS = "apartment/getLocal";
 const GET_APT_DETAIL = "apartment/getDetail";
 const ADD_INTERESTED_APT = "apartment/addInterested";
+const DELETE_INTERESTED_APT = "apartment/deleteInterested";
 
 // helper
 const getLocal = (payload) => {
@@ -22,6 +23,12 @@ const getDetail = (payload) => {
 const addIntrested = (payload) => {
   return {
     type: ADD_INTERESTED_APT,
+    payload,
+  };
+};
+const deleteInterested = (payload) => {
+  return {
+    type: DELETE_INTERESTED_APT,
     payload,
   };
 };
@@ -55,6 +62,20 @@ export const addInterestedApartment = (aptId, userId) => async (dispatch) => {
   return data;
 };
 
+export const deleteInterestedApartment =
+  (aptId, userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/apartments/${aptId}/interested`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        userId,
+        aptId,
+      }),
+    });
+    const data = await response.json();
+    dispatch(deleteInterested(data));
+    return data;
+  };
+
 // apartment reducer
 const initialState = { apartments: null };
 const apartmentReducer = (state = initialState, action) => {
@@ -71,6 +92,10 @@ const apartmentReducer = (state = initialState, action) => {
     case ADD_INTERESTED_APT:
       newState = Object.assign({}, state);
       newState.interestedApt = action.payload;
+      return newState;
+    case DELETE_INTERESTED_APT:
+      newState = Object.assign({}, state);
+      newState.interestedAptDeleted = action.payload;
       return newState;
     default:
       return state;

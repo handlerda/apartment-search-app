@@ -105,10 +105,28 @@ router.post(
         apartmentId: apartment.id,
       });
     }
+  })
+);
 
-    // } catch (error) {
-    //   res.json({ error });
-    // }
+router.delete(
+  "/:id/interested",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const googlePlaceId = req.params.id;
+    const { userId } = req.body;
+    const apartment = await Apartment.findOne({ where: { googlePlaceId } });
+    const interestedApartment = await InterestedApartment.destroy({
+      where: {
+        userId,
+        apartmentId: apartment.id,
+      },
+    });
+    res.json({
+      status: "deleted",
+      userId,
+      apartmentId: apartment.id,
+      interestedApartmentId: interestedApartment.id,
+    });
   })
 );
 
