@@ -10,4 +10,10 @@ async function getPlaces(lat, lon) {
   return data;
 }
 
-module.exports = { getPlaces };
+async function getPlace(id) {
+  const request = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&key=${GOOGLE_API_KEY}`;
+  const response = await axios.get(request);
+  const data = await response.data;
+  return data;
+}
+module.exports = { getPlaces, getPlace };

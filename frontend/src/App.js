@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import "./index.css";
+import Apartment from "./components/Apartment";
 
 console.log(process.env);
 const { REACT_APP_NOT_SECRET_CODE } = process.env;
@@ -40,6 +41,7 @@ function App() {
           </Route>
           <Route path={`/apartment/:id`}>
             <h1>Hello world</h1>
+            <Apartment />
           </Route>
         </Switch>
       )}

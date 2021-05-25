@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       googlePlaceId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
       },

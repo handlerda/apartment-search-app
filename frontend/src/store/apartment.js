@@ -1,12 +1,20 @@
 import { csrfFetch } from "./csrf";
 
 const GET_LOCAL_APTS = "apartment/getLocal";
+const GET_APT_DETAIL = "apartment/getDetail";
 
 // helper
 const getLocal = (payload) => {
   return {
     type: GET_LOCAL_APTS,
-    payload: payload,
+    payload,
+  };
+};
+
+const getDetail = (payload) => {
+  return {
+    type: GET_APT_DETAIL,
+    payload,
   };
 };
 
@@ -19,6 +27,13 @@ export const getLocalApartments = (location) => async (dispatch) => {
   return data;
 };
 
+export const getApartmentDetails = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/apartments/${id}`);
+  const data = await response.json();
+  dispatch(getDetail(data));
+  return data;
+};
+
 // apartment reducer
 const initialState = { apartments: null };
 const apartmentReducer = (state = initialState, action) => {
@@ -27,6 +42,10 @@ const apartmentReducer = (state = initialState, action) => {
     case GET_LOCAL_APTS:
       newState = Object.assign({}, state);
       newState.apartments = action.payload;
+      return newState;
+    case GET_APT_DETAIL:
+      newState = Object.assign({}, state);
+      newState.apartmentDetail = action.payload;
       return newState;
     default:
       return state;

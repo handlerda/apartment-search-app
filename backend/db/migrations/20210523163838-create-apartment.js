@@ -13,7 +13,7 @@ module.exports = {
         references: { model: "Addresses" },
       },
       googlePlaceId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

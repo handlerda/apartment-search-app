@@ -5,7 +5,7 @@ import Map from "./Map";
 function Card({ title, address, ratings, location, photoId, id }) {
   console.log(photoId);
   return (
-    <Link to={`/apartments/${id}`}>
+    <Link to={`/apartment/${id}`}>
       <div className="card">
         {/* <Map location={location} /> */}
         <img
