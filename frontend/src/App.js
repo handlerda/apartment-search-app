@@ -40,7 +40,6 @@ function App() {
             </div>
           </Route>
           <Route path={`/apartment/:id`}>
-            <h1>Hello world</h1>
             <Apartment />
           </Route>
         </Switch>

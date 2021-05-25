@@ -1,0 +1,8 @@
+.review-container {
+  display: flex;
+  flex-direction: column;
+  border: black 1px solid;
+}
+.review-content {
+  margin: 1rem;
+}

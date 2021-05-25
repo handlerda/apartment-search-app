@@ -1,0 +1,14 @@
+.apartment-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.apartment-header {
+  margin-bottom: 1.5rem;
+}
+
+.apartment-left-container {
+  width: 50%;
+  margin: 1.5rem;
+}
