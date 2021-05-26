@@ -1,6 +1,13 @@
 //apartment controllers // helper functions
 require("dotenv").config({ path: "../../.env" });
 const axios = require("axios");
+
+const {
+  User,
+  Apartment,
+  InterestedApartment,
+  Address,
+} = require("../../db/models");
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 async function getPlaces(lat, lon) {
@@ -16,4 +23,30 @@ async function getPlace(id) {
   const data = await response.data;
   return data;
 }
-module.exports = { getPlaces, getPlace };
+
+async function addPlace(googlePlaceId) {
+  //return a the new apartment
+  const place = await getPlace(googlePlaceId);
+  console.log(place);
+  const address = await Address.create({
+    latitude: place.result.geometry.location.lat,
+    longitude: place.result.geometry.location.lng,
+    formattedAddress: place.result.formatted_address,
+  });
+  const apartment = await Apartment.create({
+    addressId: address.id,
+    googlePlaceId: place.result.place_id,
+  });
+  return apartment;
+}
+
+async function checkCurrentTenant(userId, apartmentId) {
+  const user = await User.findOne({
+    where: {
+      id: userId,
+    },
+  });
+  // returns true if the user has the same apt id as what is being passed in
+  return user.currentApartmentId === apartmentId ? true : false;
+}
+module.exports = { getPlaces, getPlace, addPlace, checkCurrentTenant };

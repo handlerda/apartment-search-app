@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import apartmentReducer, {
   addInterestedApartment,
+  addNewTenant,
+  deleteCurrentTenant,
   deleteInterestedApartment,
   getApartmentDetails,
 } from "../../store/apartment";
@@ -19,9 +21,11 @@ function Apartment() {
   const dispatch = useDispatch();
   // get apt details from redux
   const apartments = useSelector((state) => state.apartments.apartmentDetail);
+  const tenantStatus = useSelector((state) => state.apartments.addNewTenant);
   //const interestedApartments = useSelector((state) => state.apartments.apartmentDetail.isInterestedApartment);
   const sessionUser = useSelector((state) => state.session.user);
   const [interested, setInterested] = useState(null);
+  const [tenant, setTenant] = useState(null);
 
   //console.log(interestedApartments);
   console.log(sessionUser);
@@ -33,6 +37,7 @@ function Apartment() {
       aptDetails.isInterestedApartment
         ? setInterested(true)
         : setInterested(false);
+      aptDetails.currentTenant ? setTenant(true) : setTenant(false);
     };
     getAptDetails();
   }, [dispatch]);
@@ -42,7 +47,7 @@ function Apartment() {
     return <p>loading</p>;
   }
 
-  async function handleSave(e) {
+  async function handleInterestedSave(e) {
     if (!interested) {
       const data = await dispatch(addInterestedApartment(id, sessionUser.id));
       setInterested(!interested);
@@ -53,6 +58,20 @@ function Apartment() {
         deleteInterestedApartment(id, sessionUser.id)
       );
       setInterested(!interested);
+      console.log(data);
+      return data;
+    }
+  }
+
+  async function handleTenantSave(e) {
+    if (!tenant) {
+      const data = await dispatch(addNewTenant(id, sessionUser.id));
+      setTenant(!tenant);
+      console.log(data);
+      return data;
+    } else {
+      const data = await dispatch(deleteCurrentTenant(id, sessionUser.id));
+      setTenant(!tenant);
       console.log(data);
       return data;
     }
@@ -87,11 +106,24 @@ function Apartment() {
           </div>
         </div>
         <div className="apartment-right-container">
-          {interested === true ? (
-            <button onClick={handleSave}>Not Interested</button>
-          ) : (
-            <button onClick={handleSave}> Interested</button>
-          )}
+          <div className="btn-group">
+            {interested === true ? (
+              <button onClick={handleInterestedSave}>
+                Not Interested in living here
+              </button>
+            ) : (
+              <button onClick={handleInterestedSave}>
+                Interested in living here
+              </button>
+            )}
+            <div>
+              {tenant === true ? (
+                <button onClick={handleTenantSave}>I don't live here</button>
+              ) : (
+                <button onClick={handleTenantSave}>I live here</button>
+              )}
+            </div>
+          </div>
           <InternalReview />
         </div>
       </div>

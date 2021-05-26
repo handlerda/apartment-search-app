@@ -16,3 +16,9 @@
 .apartment-right-container {
   margin: 1.5rem;
 }
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

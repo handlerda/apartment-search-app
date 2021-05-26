@@ -4,6 +4,8 @@ const GET_LOCAL_APTS = "apartment/getLocal";
 const GET_APT_DETAIL = "apartment/getDetail";
 const ADD_INTERESTED_APT = "apartment/addInterested";
 const DELETE_INTERESTED_APT = "apartment/deleteInterested";
+const ADD_NEW_TENANT = "apartment/addNewTenant";
+const DELETE_CURRENT_TENANT = "apartment/deleteCurrentTenant";
 
 // helper
 const getLocal = (payload) => {
@@ -29,6 +31,19 @@ const addIntrested = (payload) => {
 const deleteInterested = (payload) => {
   return {
     type: DELETE_INTERESTED_APT,
+    payload,
+  };
+};
+const addTenant = (payload) => {
+  return {
+    type: ADD_NEW_TENANT,
+    payload,
+  };
+};
+
+const deleteTenant = (payload) => {
+  return {
+    type: DELETE_CURRENT_TENANT,
     payload,
   };
 };
@@ -62,6 +77,19 @@ export const addInterestedApartment = (aptId, userId) => async (dispatch) => {
   return data;
 };
 
+export const addNewTenant = (aptId, userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/apartments/${aptId}/tenant`, {
+    method: "POST",
+    body: JSON.stringify({
+      userId,
+      aptId,
+    }),
+  });
+  const data = await response.json();
+  dispatch(addTenant(data));
+  return data;
+};
+
 export const deleteInterestedApartment =
   (aptId, userId) => async (dispatch) => {
     const response = await csrfFetch(`/api/apartments/${aptId}/interested`, {
@@ -75,6 +103,19 @@ export const deleteInterestedApartment =
     dispatch(deleteInterested(data));
     return data;
   };
+
+export const deleteCurrentTenant = (aptId, userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/apartments/${aptId}/tenant`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      userId,
+      aptId,
+    }),
+  });
+  const data = await response.json();
+  dispatch(deleteTenant(data));
+  return data;
+};
 
 // apartment reducer
 const initialState = { apartments: null };
@@ -96,6 +137,14 @@ const apartmentReducer = (state = initialState, action) => {
     case DELETE_INTERESTED_APT:
       newState = Object.assign({}, state);
       newState.interestedAptDeleted = action.payload;
+      return newState;
+    case ADD_NEW_TENANT:
+      newState = Object.assign({}, state);
+      newState.addNewTenant = action.payload;
+      return newState;
+    case DELETE_CURRENT_TENANT:
+      newState = Object.assign({}, state);
+      newState.deleteCurrentTenant = action.payload;
       return newState;
     default:
       return state;

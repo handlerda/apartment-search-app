@@ -14,7 +14,12 @@ const {
 } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
-const { getPlaces, getPlace } = require("../controllers/apartment");
+const {
+  getPlaces,
+  getPlace,
+  addPlace,
+  checkCurrentTenant,
+} = require("../controllers/apartment");
 const router = express.Router();
 
 //get nearby apartments
@@ -37,6 +42,7 @@ router.get(
     // console.log(req.User.dataValues.id);
     let apartmentInDB = null;
     let isInterestedApartment = null;
+    let apartmentId = null;
     const id = req.params.id;
     const userId = req.user.dataValues.id;
     //check if apartment is in db
@@ -47,6 +53,7 @@ router.get(
         apartmentId: apartment.id,
         userId,
       });
+      apartmentId = apartment.id;
       if (interestedApartment) {
         isInterestedApartment = true;
       } else {
@@ -54,11 +61,21 @@ router.get(
       }
       apartmentInDB = true;
     } else {
-      apartmentInDB = false;
+      // adds apt on creation
+      const apartment = await addPlace(id);
+      apartmentId = apartment.id;
+      apartmentInDB = true;
       isInterestedApartment = false;
     }
+
     const placeDetails = await getPlace(id);
-    Object.assign(placeDetails, { apartmentInDB, isInterestedApartment });
+    console.log(apartmentId);
+    const currentTenant = await checkCurrentTenant(userId, apartmentId);
+    Object.assign(placeDetails, {
+      apartmentInDB,
+      isInterestedApartment,
+      currentTenant,
+    });
     res.json(placeDetails);
   })
 );
@@ -81,19 +98,7 @@ router.post(
         res.json({ error });
       }
     } else {
-      // try {
-      const place = await getPlace(googlePlaceId);
-      console.log(place);
-      const address = await Address.create({
-        latitude: place.result.geometry.location.lat,
-        longitude: place.result.geometry.location.lng,
-        formattedAddress: place.result.formatted_address,
-      });
-      const apartment = await Apartment.create({
-        addressId: address.id,
-        googlePlaceId: place.result.place_id,
-      });
-      console.log(apartment.id);
+      const apartment = addPlace(googlePlaceId);
       const interestedApartment = await InterestedApartment.create({
         userId,
         apartmentId: apartment.id,
@@ -126,6 +131,52 @@ router.delete(
       userId,
       apartmentId: apartment.id,
       interestedApartmentId: interestedApartment.id,
+    });
+  })
+);
+
+router.post(
+  "/:id/tenant",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const googlePlaceId = req.params.id;
+    const userId = req.user.dataValues.id;
+    const user = await User.findOne({ where: { id: userId } });
+    const apartment = await Apartment.findOne({ where: { googlePlaceId } });
+    if (apartment) {
+      // add the apt id to the user
+      user.currentApartmentId = apartment.id;
+      await user.save();
+      res.json({
+        userId,
+        currentApartment: apartment.id,
+      });
+    } else {
+      // added apartment
+      const newApartment = await addPlace(googlePlaceId);
+      user.currentApartmentId = newApartment.id;
+      await user.save();
+      res.json({
+        userId,
+        currentApartment: newApartment.id,
+      });
+    }
+  })
+);
+
+router.delete(
+  "/:id/tenant",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const googlePlaceId = req.params.id;
+    const userId = req.user.dataValues.id;
+    const user = await User.findOne({ where: { id: userId } });
+    user.currentApartmentId = null;
+    await user.save();
+    res.json({
+      userId,
+      apartmentId: googlePlaceId,
+      status: "deleted",
     });
   })
 );
