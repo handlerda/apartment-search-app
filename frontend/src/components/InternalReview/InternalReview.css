@@ -1,0 +1,40 @@
+.form-box {
+  background-color: white;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  display: flex;
+  box-sizing: border-box;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.review-input-group {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  align-content: flex-end;
+}
+
+.radio-group input {
+  float: right;
+}
+
+.tenant-interested-options {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+label input {
+  margin-left: auto;
+  flex-grow: inherit;
+  float: right;
+}
+
+label input[type="text"] {
+  width: 50%;
+}
+/* .tenant-interested-options input {
+  margin-left: 40%;
+} */

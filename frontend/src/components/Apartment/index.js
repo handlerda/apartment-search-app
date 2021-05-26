@@ -10,6 +10,7 @@ import Header from "../Controls/Header";
 import Review from "./Review";
 import "./Apartment.css";
 import Map from "../Card/Map";
+import InternalReview from "../InternalReview";
 
 function Apartment() {
   const { id } = useParams();
@@ -91,6 +92,7 @@ function Apartment() {
           ) : (
             <button onClick={handleSave}> Interested</button>
           )}
+          <InternalReview />
         </div>
       </div>
     )
