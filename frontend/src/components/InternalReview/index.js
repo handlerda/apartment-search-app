@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { addNewReview } from "../../store/review";
 
 import "./InternalReview.css";
 function InternalReview() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const reviews = useSelector((state) => state.reviews);
   const apartment = useSelector((state) => state.apartments.apartmentDetail);
   const [title, setTitle] = useState("");
@@ -47,7 +49,8 @@ function InternalReview() {
       paymentPreference,
     };
     const data = await dispatch(addNewReview(payload));
-    console.log(data);
+    console.log(apartment.result.place_id);
+    history.push(`/apartment/${apartment.result.place_id}`);
   }
   //addNewReview
   return (

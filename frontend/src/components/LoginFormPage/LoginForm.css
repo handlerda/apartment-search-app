@@ -11,6 +11,13 @@
   padding: 1rem;
 }
 
+.form-box-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .input-group {
   padding-top: 2rem;
   display: flex;

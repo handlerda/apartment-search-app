@@ -2,6 +2,8 @@ import React from "react";
 import "./InterestedTenant.css";
 
 function InterestedTenant({
+  title,
+  body,
   name,
   text,
   email,
@@ -13,53 +15,78 @@ function InterestedTenant({
   return (
     <div className="interested-tenant-container">
       <div className="interested">
-        <div className="mediums">
-          <div className="tenant-interested-options">
-            <h4>How {name} wants to be reached out</h4>
-            <label>
-              Text (SMS)
-              <input name="text" type="checkbox" checked={text} disabled />
-            </label>
-            <label>
-              Email
-              <input name="email" type="checkbox" checked={email} disabled />
-            </label>
-            <label>
-              Phone
-              <input name="phone" type="checkbox" checked={phone} disabled />
-            </label>
+        {title && body && (
+          <div className="review">
+            <div className="tenant-interested-options tenant-interested-review">
+              <h4>Title: {title}</h4>
+              <p>
+                <span style={{ fontWeight: "bold" }}>review: </span>
+                {body}
+              </p>
+            </div>
+          </div>
+        )}
+        {requestedAmount && (
+          <div className="interested-review">
+            <div className="mediums">
+              <div className="tenant-interested-options">
+                <h4>How {name} wants to be reached out</h4>
+                <label>
+                  Text (SMS)
+                  <input name="text" type="checkbox" checked={text} disabled />
+                </label>
+                <label>
+                  Email
+                  <input
+                    name="email"
+                    type="checkbox"
+                    checked={email}
+                    disabled
+                  />
+                </label>
+                <label>
+                  Phone
+                  <input
+                    name="phone"
+                    type="checkbox"
+                    checked={phone}
+                    disabled
+                  />
+                </label>
 
-            {other && (
-              <label>
-                Other
-                <input name="other" type="text" value={other} disabled />
-              </label>
-            )}
+                {other && (
+                  <label>
+                    Other
+                    <input name="other" type="text" value={other} disabled />
+                  </label>
+                )}
+              </div>
+            </div>
+            <div className="price">
+              <div className="tenant-interested-options">
+                <h4>Payment</h4>
+                <label>
+                  Payment types they accept
+                  <input
+                    name="paymentOptions"
+                    type="text"
+                    value={paymentOptions}
+                    disabled
+                  />
+                </label>
+                <label>
+                  Amount
+                  <input
+                    name="amount"
+                    type="text"
+                    value={requestedAmount}
+                    disabled
+                  />
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="price">
-          <div className="tenant-interested-options">
-            <h4>Payment</h4>
-            <label>
-              Payment types they accept
-              <input
-                name="paymentOptions"
-                type="text"
-                value={paymentOptions}
-                disabled
-              />
-            </label>
-            <label>
-              Amount
-              <input
-                name="amount"
-                type="text"
-                value={requestedAmount}
-                disabled
-              />
-            </label>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

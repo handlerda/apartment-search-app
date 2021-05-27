@@ -31,7 +31,7 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-box">
+    <form onSubmit={handleSubmit} className="form-box-log">
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>

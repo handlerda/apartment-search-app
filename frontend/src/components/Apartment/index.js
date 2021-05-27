@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import apartmentReducer, {
   addInterestedApartment,
   addNewTenant,
@@ -17,6 +17,7 @@ import InterestedTenant from "./InterestedTenant";
 
 function Apartment() {
   const { id } = useParams();
+  const history = useHistory();
 
   console.log(id);
   const dispatch = useDispatch();
@@ -24,12 +25,14 @@ function Apartment() {
   const apartments = useSelector((state) => state.apartments.apartmentDetail);
   const tenantStatus = useSelector((state) => state.apartments.addNewTenant);
   const sessionUser = useSelector((state) => state.session.user);
+  console.log(`here is the sessionUser`, sessionUser);
   const [interested, setInterested] = useState(null);
   const [tenant, setTenant] = useState(null);
 
-  //console.log(interestedApartments);
-  console.log(sessionUser);
-  // get location details from redux store
+  // no session user redirect to login
+  if (!sessionUser) {
+    history.push("/login");
+  }
 
   useEffect(() => {
     const getAptDetails = async () => {
@@ -144,6 +147,8 @@ function Apartment() {
               return review.InterestedTenants.map((tenant) => {
                 return (
                   <InterestedTenant
+                    title={review.title}
+                    body={review.body}
                     name={review.User.username}
                     text={tenant.text}
                     email={tenant.email}
