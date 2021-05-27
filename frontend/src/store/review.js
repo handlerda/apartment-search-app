@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 
-const GET_APT_REVIEWS = "apartment/getLocal";
-const ADD_APT_REVIEWS = "apartment/getDetail";
+const GET_APT_REVIEWS = "review/getReview";
+const ADD_APT_REVIEWS = "review/addReview";
 
 // helper
 const getReview = (payload) => {

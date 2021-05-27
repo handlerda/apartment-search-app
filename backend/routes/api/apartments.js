@@ -75,6 +75,7 @@ router.get(
       apartmentInDB,
       isInterestedApartment,
       currentTenant,
+      apartmentId,
     });
     res.json(placeDetails);
   })

@@ -6,6 +6,7 @@ import "./InternalReview.css";
 function InternalReview() {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
+  const apartment = useSelector((state) => state.apartments.apartmentDetail);
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
   const [text, setText] = useState(false);
@@ -14,6 +15,7 @@ function InternalReview() {
   const [amount, setAmount] = useState("");
   const [other, setOther] = useState("");
   const [paymentPreference, setPaymentPreference] = useState("");
+  const apartmentId = apartment.apartmentId;
 
   const [isInterested, setIsInterested] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -35,11 +37,13 @@ function InternalReview() {
     const payload = {
       title,
       review,
+      isInterested,
       text,
       email,
       phone,
       amount,
       other,
+      apartmentId,
       paymentPreference,
     };
     const data = await dispatch(addNewReview(payload));
