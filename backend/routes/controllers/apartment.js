@@ -7,6 +7,8 @@ const {
   Apartment,
   InterestedApartment,
   Address,
+  Review,
+  InterestedTenant,
 } = require("../../db/models");
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
@@ -49,4 +51,20 @@ async function checkCurrentTenant(userId, apartmentId) {
   // returns true if the user has the same apt id as what is being passed in
   return user.currentApartmentId === apartmentId ? true : false;
 }
-module.exports = { getPlaces, getPlace, addPlace, checkCurrentTenant };
+
+async function getAssociatedReviews(apartmentId) {
+  const associatedModels = await Review.findAll({
+    where: {
+      apartmentId,
+    },
+    include: [InterestedTenant],
+  });
+  return associatedModels;
+}
+module.exports = {
+  getPlaces,
+  getPlace,
+  addPlace,
+  checkCurrentTenant,
+  getAssociatedReviews,
+};

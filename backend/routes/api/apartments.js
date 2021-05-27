@@ -19,6 +19,7 @@ const {
   getPlace,
   addPlace,
   checkCurrentTenant,
+  getAssociatedReviews,
 } = require("../controllers/apartment");
 const router = express.Router();
 
@@ -71,11 +72,17 @@ router.get(
     const placeDetails = await getPlace(id);
     console.log(apartmentId);
     const currentTenant = await checkCurrentTenant(userId, apartmentId);
+    //get associated reviews and interested
+    const associatedReviews = await getAssociatedReviews(apartmentId);
+    console.log(`WHERE IS THIS LOGGING`);
+    //console.log(associatedReviews);
+
     Object.assign(placeDetails, {
       apartmentInDB,
       isInterestedApartment,
       currentTenant,
       apartmentId,
+      associatedReviews,
     });
     res.json(placeDetails);
   })

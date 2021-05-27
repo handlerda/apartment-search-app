@@ -13,6 +13,7 @@ import Review from "./Review";
 import "./Apartment.css";
 import Map from "../Card/Map";
 import InternalReview from "../InternalReview";
+import InterestedTenant from "./InterestedTenant";
 
 function Apartment() {
   const { id } = useParams();
@@ -22,7 +23,6 @@ function Apartment() {
   // get apt details from redux
   const apartments = useSelector((state) => state.apartments.apartmentDetail);
   const tenantStatus = useSelector((state) => state.apartments.addNewTenant);
-  //const interestedApartments = useSelector((state) => state.apartments.apartmentDetail.isInterestedApartment);
   const sessionUser = useSelector((state) => state.session.user);
   const [interested, setInterested] = useState(null);
   const [tenant, setTenant] = useState(null);
@@ -129,7 +129,26 @@ function Apartment() {
               )}
             </div>
           </div>
-          <InternalReview />
+          {tenant === true ? (
+            <InternalReview />
+          ) : (
+            apartments.associatedReviews.map((review) => {
+              return review.InterestedTenants.map((tenant) => {
+                return (
+                  <InterestedTenant
+                    name={tenant.name}
+                    text={tenant.text}
+                    email={tenant.email}
+                    other={tenant.other}
+                    requestedAmount={tenant.requestedAmount}
+                    phone={tenant.phone}
+                    paymentOptions={tenant.paymentPreference}
+                    key={tenant.id}
+                  />
+                );
+              });
+            })
+          )}
         </div>
       </div>
     )
