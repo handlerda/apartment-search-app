@@ -1,21 +1,58 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewReview } from "../../store/review";
 
 import "./InternalReview.css";
 function InternalReview() {
+  const dispatch = useDispatch();
+  const reviews = useSelector((state) => state.reviews);
   const [title, setTitle] = useState("");
+  const [review, setReview] = useState("");
   const [text, setText] = useState(false);
   const [email, setEmail] = useState(false);
   const [phone, setPhone] = useState(false);
+  const [amount, setAmount] = useState("");
   const [other, setOther] = useState("");
-  const [review, setReview] = useState("");
+  const [paymentPreference, setPaymentPreference] = useState("");
+
   const [isInterested, setIsInterested] = useState(null);
+  const [errors, setErrors] = useState(null);
   console.log(isInterested);
+
+  useEffect(() => {}, [
+    title,
+    review,
+    text,
+    email,
+    phone,
+    amount,
+    other,
+    paymentPreference,
+  ]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const payload = {
+      title,
+      review,
+      text,
+      email,
+      phone,
+      amount,
+      other,
+      paymentPreference,
+    };
+    const data = await dispatch(addNewReview(payload));
+    console.log(data);
+  }
+  //addNewReview
   return (
-    <form className="form-box">
+    <form className="form-box" onSubmit={handleSubmit}>
       <ur>
-        {/* {errors.map((error, idx) => {
-          <li key={idx}>{error}</li>;
-        })} */}
+        {errors &&
+          errors.map((error, idx) => {
+            <li key={idx}>{error}</li>;
+          })}
       </ur>
       <label>Title</label>
       <div className="review-input-group">
@@ -29,7 +66,7 @@ function InternalReview() {
       <div className="review-input-group">
         <textarea
           type="text"
-          value={title}
+          value={review}
           onChange={(e) => setReview(e.target.value)}
         />
       </div>
@@ -110,10 +147,10 @@ function InternalReview() {
               <label>
                 Payment types you accept
                 <input
-                  name="amount"
+                  name="paymentOptions"
                   type="text"
                   placeholder="Venmo, Cash App, Bitcoin e.t.c"
-                  onChange={(e) => setOther(e.target.value)}
+                  onChange={(e) => setPaymentPreference(e.target.value)}
                 />
               </label>
               <label>
@@ -122,14 +159,16 @@ function InternalReview() {
                   name="amount"
                   type="text"
                   placeholder="Whatever feels right"
-                  onChange={(e) => setOther(e.target.value)}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
               </label>
             </div>
           </div>
         </div>
       )}
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={!!errors}>
+        Submit
+      </button>
     </form>
   );
 }

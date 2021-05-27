@@ -93,16 +93,21 @@ function Apartment() {
           <Map location={apartments.result.geometry.location} />
           <div>
             <h5>Public Reviews</h5>
-            {apartments.result.reviews.map((review) => {
-              return (
-                <Review
-                  date={review.relative_time_description}
-                  name={review.author_name}
-                  text={review.text}
-                  rating={review.rating}
-                />
-              );
-            })}
+            {console.log(apartments)}
+            {apartments.result.reviews ? (
+              apartments.result.reviews.map((review) => {
+                return (
+                  <Review
+                    date={review.relative_time_description}
+                    name={review.author_name}
+                    text={review.text}
+                    rating={review.rating}
+                  />
+                );
+              })
+            ) : (
+              <h1>There are no reviews</h1>
+            )}
           </div>
         </div>
         <div className="apartment-right-container">

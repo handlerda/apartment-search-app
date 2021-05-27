@@ -35,6 +35,10 @@ label input {
 label input[type="text"] {
   width: 50%;
 }
+
+textarea {
+  width: 100%;
+}
 /* .tenant-interested-options input {
   margin-left: 40%;
 } */
