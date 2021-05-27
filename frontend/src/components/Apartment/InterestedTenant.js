@@ -1,4 +1,5 @@
 import React from "react";
+import "./InterestedTenant.css";
 
 function InterestedTenant({
   name,
@@ -12,11 +13,10 @@ function InterestedTenant({
   console.log(`hello world`);
   return (
     <div className="interested-tenant-container">
-      <h5 className="interested-tenant-content">{name}</h5>
       <div className="interested">
         <div className="mediums">
-          <h4>Select from the following mediums</h4>
           <div className="tenant-interested-options">
+            <h4>How {name} wants to be reached out</h4>
             <label>
               Text (SMS)
               <input name="text" type="checkbox" checked={text} disabled />
@@ -29,28 +29,20 @@ function InterestedTenant({
               Phone
               <input name="phone" type="checkbox" checked={phone} disabled />
             </label>
-            <label>
-              Other
-              <input
-                name="other"
-                type="text"
-                placeholder="Zoom, Facetime, e.t.c"
-                value={other}
-                disabled
-              />
-            </label>
+
+            {other && (
+              <label>
+                Other
+                <input name="other" type="text" value={other} disabled />
+              </label>
+            )}
           </div>
         </div>
         <div className="price">
-          <h4>Payment</h4>
-          <p>
-            You can charge for your time to speak to a potential tenant. We find
-            most people charge betweem 10-15 dollars for a 15 minute phone call,
-            but it is up to you!
-          </p>
           <div className="tenant-interested-options">
+            <h4>Payment</h4>
             <label>
-              Payment types you accept
+              Payment types they accept
               <input
                 name="paymentOptions"
                 type="text"
