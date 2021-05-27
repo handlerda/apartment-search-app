@@ -106,7 +106,7 @@ function Apartment() {
                 );
               })
             ) : (
-              <h1>There are no reviews</h1>
+              <h1>There are no public reviews</h1>
             )}
           </div>
         </div>
@@ -129,6 +129,14 @@ function Apartment() {
               )}
             </div>
           </div>
+          {tenant === false && apartments.associatedReviews.length > 0 && (
+            <h1 className="user-review-header">User Reviews</h1>
+          )}
+
+          {tenant === false && apartments.associatedReviews.length === 0 && (
+            <h1 className="user-review-header">No User Reviews</h1>
+          )}
+
           {tenant === true ? (
             <InternalReview />
           ) : (
@@ -136,7 +144,7 @@ function Apartment() {
               return review.InterestedTenants.map((tenant) => {
                 return (
                   <InterestedTenant
-                    name={tenant.name}
+                    name={review.User.username}
                     text={tenant.text}
                     email={tenant.email}
                     other={tenant.other}

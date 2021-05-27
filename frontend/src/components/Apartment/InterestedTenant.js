@@ -10,7 +10,6 @@ function InterestedTenant({
   paymentOptions,
   requestedAmount,
 }) {
-  console.log(`hello world`);
   return (
     <div className="interested-tenant-container">
       <div className="interested">

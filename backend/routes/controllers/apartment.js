@@ -57,7 +57,7 @@ async function getAssociatedReviews(apartmentId) {
     where: {
       apartmentId,
     },
-    include: [InterestedTenant],
+    include: [InterestedTenant, User],
   });
   return associatedModels;
 }
