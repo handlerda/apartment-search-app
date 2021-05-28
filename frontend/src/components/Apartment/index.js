@@ -144,22 +144,28 @@ function Apartment() {
             <InternalReview />
           ) : (
             apartments.associatedReviews.map((review) => {
-              return review.InterestedTenants.map((tenant) => {
+              if (review.InterestedTenants.length) {
+                return review.InterestedTenants.map((tenant) => {
+                  return (
+                    <InterestedTenant
+                      title={review.title}
+                      body={review.body}
+                      name={review.User.username}
+                      text={tenant.text}
+                      email={tenant.email}
+                      other={tenant.other}
+                      requestedAmount={tenant.requestedAmount}
+                      phone={tenant.phone}
+                      paymentOptions={tenant.paymentPreference}
+                      key={tenant.id}
+                    />
+                  );
+                });
+              } else {
                 return (
-                  <InterestedTenant
-                    title={review.title}
-                    body={review.body}
-                    name={review.User.username}
-                    text={tenant.text}
-                    email={tenant.email}
-                    other={tenant.other}
-                    requestedAmount={tenant.requestedAmount}
-                    phone={tenant.phone}
-                    paymentOptions={tenant.paymentPreference}
-                    key={tenant.id}
-                  />
+                  <InterestedTenant title={review.title} body={review.body} />
                 );
-              });
+              }
             })
           )}
         </div>
