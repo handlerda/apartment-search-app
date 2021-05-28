@@ -5,8 +5,10 @@ nav {
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-content: center;
 }
+
 .session-links {
   margin-left: auto;
   padding-right: 1rem;
@@ -19,4 +21,12 @@ nav {
 
 .container > li {
   flex: 1;
+}
+
+.home-button {
+  width: 4rem;
+}
+
+.log-nav-button {
+  margin-left: 1rem;
 }

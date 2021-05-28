@@ -1,32 +1,54 @@
 // frontend/src/components/Navigation/index.js
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
+  console.log(sessionUser);
+  function handleNavClick(location) {
+    history.push(location);
+  }
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = (
+      <button onClick={() => handleNavClick(`/user/${sessionUser.id}`)}>
+        User Profile
+      </button>
+    );
+    // <ProfileButton user={sessionUser} />;
   } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <button
+          className="log-nav-button"
+          onClick={() => handleNavClick("/login")}
+        >
+          Log In
+        </button>
+        <button
+          className="log-nav-button"
+          onClick={() => handleNavClick("/signup")}
+        >
+          Log out
+        </button>
       </>
     );
   }
 
   return (
     <nav>
-      <ul className="container">
-        <NavLink exact to="/" id="home-button">
-          Home
-        </NavLink>
-        {isLoaded && <div className="session-links">{sessionLinks}</div>}
+      <ul>
+        <div className="container">
+          <button onClick={() => handleNavClick("/")} className="home-button">
+            Home
+          </button>
+          {isLoaded && <div className="session-links">{sessionLinks}</div>}
+        </div>
       </ul>
     </nav>
   );

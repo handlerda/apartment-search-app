@@ -9,7 +9,8 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import "./index.css";
 import Apartment from "./components/Apartment";
-
+import UserDetailPage from "./components/UserDetailPage";
+import "./styles/tailwind.css";
 console.log(process.env);
 const { REACT_APP_NOT_SECRET_CODE } = process.env;
 
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path={`/apartment/:id`}>
             <Apartment />
+          </Route>
+          <Route path={`/user/:id`}>
+            <UserDetailPage />
           </Route>
         </Switch>
       )}
