@@ -11,10 +11,6 @@ import "./index.css";
 import Apartment from "./components/Apartment";
 import UserDetailPage from "./components/UserDetailPage";
 import "./styles/tailwind.css";
-console.log(process.env);
-const { REACT_APP_NOT_SECRET_CODE } = process.env;
-
-console.log(REACT_APP_NOT_SECRET_CODE);
 
 function App() {
   const dispatch = useDispatch();

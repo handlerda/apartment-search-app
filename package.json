@@ -25,6 +25,8 @@
   "homepage": "https://github.com/handlerda/apartment-search-app#readme",
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.1.16",
+    "@headlessui/react": "^1.2.0",
+    "@heroicons/react": "^1.0.1",
     "axios": "^0.21.1"
   }
 }

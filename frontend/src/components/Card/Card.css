@@ -78,6 +78,11 @@ h5 {
   text-transform: uppercase;
 }
 
+.card-img {
+  width: 200px;
+  height: 200px;
+}
+
 .card-body {
   padding: 1.2em;
 }

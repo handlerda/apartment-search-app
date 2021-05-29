@@ -12,9 +12,8 @@ function Card({ title, address, ratings, location, photoId, id }) {
           src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${
             photoId ? photoId[0].photo_reference : null
           }&key=${process.env.REACT_APP_GOOGLE_API_CODE}`}
-          width="200px"
-          height="200px"
           alt="generalImg"
+          className="card-img"
         ></img>
         <div className="card-body">
           <h2 id="title">{title}</h2>
