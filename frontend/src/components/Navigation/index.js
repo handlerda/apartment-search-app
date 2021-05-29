@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/index.js
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -69,13 +69,14 @@ function Navigation({ isLoaded }) {
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-orange-500 mb-3">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-            <a
-              className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-              href="#pablo"
+          <div className="w-full relative flex justify-between ">
+            <NavLink
+              className=" text-sm font-bold leading-relaxed inline-block py-2 whitespace-nowrap uppercase  text-white "
+              to={`/`}
             >
-              orange Tailwind Starter Kit
-            </a>
+              Apartment App
+            </NavLink>
+
             <button
               className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
               type="button"
@@ -83,41 +84,74 @@ function Navigation({ isLoaded }) {
             >
               <i className="fas fa-bars"></i>
             </button>
-          </div>
-          <div
-            className={
-              "lg:flex flex-grow items-center" +
-              (navbarOpen ? " flex" : " hidden")
-            }
+
+            {/* <div
+            // className={"lg:flex flex-grow items-center flex"}
+            //{
+            //   "lg:flex flex-grow items-center flex" +
+            //   // (navbarOpen ? " flex" : " hidden")
+            // }
             id="example-navbar-danger"
-          >
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+          > */}
+            <ul className="flex flex-col lg:flex-row list-none md:flex-row ">
               <li className="nav-item">
                 <a
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  className="px-3 py-2 flex text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="#pablo"
                 >
                   <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Share</span>
+                  <span className="ml-2">Home</span>
                 </a>
               </li>
               <li className="nav-item">
                 <a
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
-                >
-                  <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Tweet</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  className="px-3 py-2 flex  text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="#pablo"
                 >
                   <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Pin</span>
+                  <span className="ml-2">My Apartments</span>
                 </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex  text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="#pablo"
+                >
+                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i>
+                  <span className="ml-2">My profile</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <label for="search" class="sr-only">
+                  Search
+                </label>
+                <div class="px-3 py-2 flex relative rounded-md shadow-sm">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      class="mr-3 h-4 w-4 text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
+                    placeholder="Search"
+                  />
+                </div>
               </li>
             </ul>
           </div>
