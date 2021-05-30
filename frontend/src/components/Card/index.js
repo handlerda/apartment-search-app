@@ -2,6 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Card.css";
 import Map from "./Map";
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import {
+  CodeIcon,
+  DotsVerticalIcon,
+  FlagIcon,
+  StarIcon,
+} from "@heroicons/react/solid";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 function Card({ title, address, ratings, location, photoId, id }) {
   console.log(photoId);
   return (

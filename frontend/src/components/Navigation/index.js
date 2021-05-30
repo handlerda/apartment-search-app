@@ -125,13 +125,13 @@ function Navigation({ isLoaded }) {
                 <label for="search" class="sr-only">
                   Search
                 </label>
-                <div class="px-3 py-2 flex relative rounded-md shadow-sm">
+                <div class="px-3 py-2 ml-4 flex relative rounded-md shadow-sm">
                   <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    className="absolute  inset-y-0 flex items-center pointer-events-none"
                     aria-hidden="true"
                   >
                     <svg
-                      class="mr-3 h-4 w-4 text-gray-400"
+                      className=" h-4 w-4 ml-4 text-gray-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -148,7 +148,7 @@ function Navigation({ isLoaded }) {
                     type="text"
                     name="search"
                     id="search"
-                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
+                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md ml-2"
                     placeholder="Search"
                   />
                 </div>
