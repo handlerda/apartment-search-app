@@ -3,14 +3,18 @@ nav {
   padding: 1rem;
 }
 
-.container {
+.nav-container {
   display: flex;
   flex-direction: row;
+  list-style: none;
 }
-.session-links {
-  margin-left: auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
+
+@media only screen and (min-width: 600px) {
+  .session-links {
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }
 
 .session-links a {
@@ -19,4 +23,25 @@ nav {
 
 .container > li {
   flex: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-nav {
+    font-size: 0.7em;
+    padding: 0;
+  }
+  .session-links {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.nav-link {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

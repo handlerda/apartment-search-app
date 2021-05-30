@@ -22,10 +22,14 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav>
-      <ul className="container">
-        <NavLink exact to="/" id="home-button">
-          Home
+      <ul className="nav-container">
+        <NavLink className="nav-link" to="/">
+          Apartment App
         </NavLink>
+        <NavLink className="nav-link" to="/">
+          Apartment App
+        </NavLink>
+        <NavLink className="nav-link" exact to="/" id="home-button"></NavLink>
         {isLoaded && <div className="session-links">{sessionLinks}</div>}
       </ul>
     </nav>

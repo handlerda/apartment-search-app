@@ -1,4 +1,14 @@
-.container {
+.header-container {
   display: flex;
   flex-direction: column;
+  background-color: white;
+  padding: 1rem;
+}
+
+.header-container p {
+  margin-bottom: 0.2rem;
+}
+
+.header-span-bold {
+  font-weight: bold;
 }
