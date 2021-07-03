@@ -26,6 +26,7 @@ module.exports = {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: { model: "Apartments" },
+        //test
       },
       anonymous: {
         allowNull: true,
